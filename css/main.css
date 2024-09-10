@@ -75,6 +75,7 @@ li.todo-list-item{
 li label.checkbox{
     width: 85%;
 }
+
 li .modify{
     color: green;
     font-size: 25px;
@@ -89,7 +90,19 @@ li .remove{
 li .remove:hover{
     cursor: pointer;
 }
-li .checkbox input{
+li .checkbox input[type="checkbox"]{
     transform: scale(1.5);
     margin-right: 10px;
 }
+li .checkbox input[type="text"]{
+    
+    font-size: 20px;
+    border-radius: 5px;
+    border: 0.5px solid black;
+    padding: 2px;
+}
+
+.checked{    
+    text-decoration:line-through;
+    color: #868e96;
+  }
