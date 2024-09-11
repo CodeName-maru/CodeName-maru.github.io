@@ -68,17 +68,21 @@ li:nth-child(even){
 }
 li.todo-list-item{
     display: flex;  
-    justify-content: space-between;
     align-items: center;
     padding:15px
 }
 li label.checkbox{
+    display: flex;
+    box-sizing: border-box;
     width: 85%;
+    padding-right: 40%;   
 }
 
 li .modify{
     color: green;
     font-size: 25px;
+    margin-right: 10px;
+    
 }
 li .modify:hover{
     cursor: pointer;
