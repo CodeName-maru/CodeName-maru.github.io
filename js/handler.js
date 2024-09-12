@@ -84,7 +84,7 @@ const removeHandler = (e) => {
 
     setTimeout(() => {
         $todoList.removeChild($removeButton.parentNode);
-    }, 1350);
+    }, 1000);
 };
 const modifyHandler = (e) => {
     const $modifyButton = e.target.closest(".modify");
