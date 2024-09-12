@@ -133,3 +133,20 @@ li .checkbox input[type="text"] {
     text-decoration: line-through;
     color: #868e96;
 }
+/* 삭제 모션 */
+.delMoving {
+    animation: delMove 1.5s ease-in-out;
+  }
+  @keyframes delMove {
+    0% {
+        background: orange;
+        transform: translateX(20px);
+    }
+    50% {
+        transform: translateX(-500px);
+    } 
+    100% {
+        background: orangered;
+        transform: translateX(-2000px);
+    }
+  }

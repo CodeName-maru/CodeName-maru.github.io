@@ -60,7 +60,10 @@ const removeHandler = (e) => {
     if (!$removeButton) {
         return;
     }
-    $todoList.removeChild($removeButton.parentNode);
+    $removeButton.parentNode.classList.add("delMoving");
+    setTimeout(() => {
+        $todoList.removeChild($removeButton.parentNode);
+    }, 1500);
 };
 const modifyHandler = (e) => {
     const $modifyButton = e.target.closest(".modify");
@@ -80,15 +83,22 @@ const modifyHandler = (e) => {
             $inputField.setAttribute("value", $spanText.textContent);
             // span 요소를 input 요소로 대체
             $label.replaceChild($inputField, $spanText);
+            $modifyButton.firstElementChild.classList.replace(
+                "lnr-undo",
+                "lnr-checkmark-circle"
+            );
         }
     } else if ($label.querySelector('input[type="text"]')) {
         const $inputField = $label.querySelector('input[type="text"]');
-
         if ($inputField.value.trim() !== "" && $inputField.value != null) {
             const $spanText = document.createElement("span");
             $spanText.classList.add("text");
             $spanText.textContent = $inputField.value;
             $label.replaceChild($spanText, $inputField);
+            $modifyButton.firstElementChild.classList.replace(
+                "lnr-checkmark-circle",
+                "lnr-undo"
+            );
         } else {
             alert("뭐라도 적으렴!");
         }
