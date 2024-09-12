@@ -1,4 +1,11 @@
-import { id, getId, $todoInsert, $todoList, $todoInput } from "./vendor.js";
+import {
+    id,
+    getId,
+    $todoInsert,
+    $todoList,
+    $todoInput,
+    todos,
+} from "./vendor.js";
 //핸들러 모음
 const todoInsertHandler = (e) => {
     e.preventDefault();
@@ -11,8 +18,13 @@ const todoInsertHandler = (e) => {
         $todoInput.value = "";
         return;
     } else {
+        let element = {
+            id: getId(),
+            text: "",
+            done: false,
+        };
         const $li = document.createElement("li");
-        $li.setAttribute("data-id", getId());
+        $li.setAttribute("data-id", element.id);
         $li.classList.add("todo-list-item");
 
         // label 요소 생성
@@ -25,6 +37,7 @@ const todoInsertHandler = (e) => {
         const $spanText = document.createElement("span");
         $spanText.classList.add("text");
         $spanText.textContent = $todoInsert.firstElementChild.value;
+        element.text = $todoInsert.firstElementChild.value;
         // label 내부에 checkbox와 spanText를 추가
         $label.appendChild($checkbox);
         $label.appendChild($spanText);
@@ -47,12 +60,16 @@ const todoInsertHandler = (e) => {
         $li.appendChild($modifyBtn);
         $li.appendChild($removeBtn);
 
-        //투두리스트추가
+        //투두리스트추가, 스크롤 옮기기
         $todoList.appendChild($li);
+        $todoList.scrollTop = $todoList.scrollHeight;
         //input창 초기화
         $todoInsert.firstElementChild.value = "";
         $todoInput.classList.remove("tenWords");
         $todoInput.setAttribute("placeholder", "할 일을 입력하세요");
+
+        //배열데이터 추가
+        todos.push(element);
     }
 };
 const removeHandler = (e) => {
@@ -60,10 +77,14 @@ const removeHandler = (e) => {
     if (!$removeButton) {
         return;
     }
+    const dataId = +$removeButton.parentNode.dataset.id;
+    const dataIdx = todos.findIndex((element) => element.id === dataId);
+    todos.splice(dataIdx, 1);
     $removeButton.parentNode.classList.add("delMoving");
+
     setTimeout(() => {
         $todoList.removeChild($removeButton.parentNode);
-    }, 1500);
+    }, 1350);
 };
 const modifyHandler = (e) => {
     const $modifyButton = e.target.closest(".modify");
@@ -99,6 +120,9 @@ const modifyHandler = (e) => {
                 "lnr-checkmark-circle",
                 "lnr-undo"
             );
+            const dataId = +$modifyButton.parentNode.dataset.id;
+            const dataIdx = todos.findIndex((element) => element.id === dataId);
+            todos[dataIdx].text = $inputField.value;
         } else {
             alert("뭐라도 적으렴!");
         }
@@ -111,5 +135,8 @@ const checkedHandler = (e) => {
     }
     const $checkboxSpan = $checkbox.parentNode.querySelector("span");
     $checkboxSpan.classList.toggle("checked");
+    const dataId = +$checkbox.parentNode.parentNode.dataset.id;
+    const dataIdx = todos.findIndex((element) => element.id === dataId);
+    todos[dataIdx].done = !todos[dataIdx].done;
 };
 export { todoInsertHandler, removeHandler, modifyHandler, checkedHandler };
