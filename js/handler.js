@@ -2,7 +2,7 @@ import { id, getId, $todoInsert, $todoList } from "./vendor.js";
 //핸들러 모음
 const todoInsertHandler = (e) => {
     e.preventDefault();
-    if ($todoInsert.firstElementChild.value === "") {
+    if ($todoInsert.firstElementChild.value.trim() === "") {
         alert("아무것도 안할거니! 할 일을 적어조!");
         return; // 유효성 검증
     } else {
@@ -90,10 +90,15 @@ const modifyHandler = (e) => {
     }
 };
 const checkedHandler = (e) => {
-    const $checkbox = e.target.closest(".checkbox");
+    console.log(e.target);
+
+    const $checkbox = e.target.closest("input");
     if (!$checkbox) {
         return;
     }
-    $checkbox.classList.toggle("checked");
+    const $checkboxSpan = $checkbox.parentNode.querySelector("span");
+    console.log("$checkbox: ", $checkbox);
+
+    $checkboxSpan.classList.toggle("checked");
 };
 export { todoInsertHandler, removeHandler, modifyHandler, checkedHandler };

@@ -1,43 +1,49 @@
-
-* { 
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body { 
+
+body {
     min-height: 100vh;
     position: relative;
 }
-.wrapper{
+
+.wrapper {
     position: absolute;
     left: 50%;
     top: 50%;
     width: 520px;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     border-radius: 10px;
-    box-shadow: 0 10px 10px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
 }
-section.todo-template{
+
+section.todo-template {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.app-title{
+
+.app-title {
     padding: 20px;
     font-size: 25px;
     color: white;
     width: 100%;
     text-align: center;
-    border-radius:10px 10px 0px 0px;
+    border-radius: 10px 10px 0px 0px;
     background-color: #22B8CF;
 }
-.content{
+
+.content {
     width: 100%;
 }
-form{
+
+form {
     display: flex;
 }
-form input{
+
+form input {
     font-size: 15px;
     flex-grow: 10;
     height: 40px;
@@ -46,7 +52,8 @@ form input{
     color: white;
     border: none;
 }
-form button{
+
+form button {
     font-size: 20px;
     border: none;
     flex-grow: 1;
@@ -54,59 +61,69 @@ form button{
     background-color: #868e96;
     ;
 }
-form button:hover{
+
+form button:hover {
     background-color: #ADB5BD;
     cursor: pointer;
 }
-ul.todo-list{
+
+ul.todo-list {
     overflow: auto;
     max-height: 400px;
     border-radius: 0px 0px 10px 10px;
 }
-li:nth-child(even){
+
+li:nth-child(even) {
     background-color: #F8F9FA;
 }
-li.todo-list-item{
-    display: flex;  
+
+li.todo-list-item {
+    display: flex;
     align-items: center;
-    padding:15px
+    padding: 15px
 }
-li label.checkbox{
+
+li label.checkbox {
     display: flex;
     box-sizing: border-box;
     width: 85%;
-    padding-right: 40%;   
+    padding-right: 40%;
 }
 
-li .modify{
+li .modify {
     color: green;
     font-size: 25px;
     margin-right: 10px;
-    
+
 }
-li .modify:hover{
+
+li .modify:hover {
     cursor: pointer;
 }
-li .remove{
+
+li .remove {
     color: red;
     font-size: 25px;
 }
-li .remove:hover{
+
+li .remove:hover {
     cursor: pointer;
 }
-li .checkbox input[type="checkbox"]{
+
+li .checkbox input[type="checkbox"] {
     transform: scale(1.5);
     margin-right: 10px;
 }
-li .checkbox input[type="text"]{
-    
+
+li .checkbox input[type="text"] {
+
     font-size: 20px;
     border-radius: 5px;
     border: 0.5px solid black;
     padding: 2px;
 }
 
-.checked{    
-    text-decoration:line-through;
+.checked {
+    text-decoration: line-through;
     color: #868e96;
-  }
+}
