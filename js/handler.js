@@ -1,10 +1,15 @@
-import { id, getId, $todoInsert, $todoList } from "./vendor.js";
+import { id, getId, $todoInsert, $todoList, $todoInput } from "./vendor.js";
 //핸들러 모음
 const todoInsertHandler = (e) => {
     e.preventDefault();
     if ($todoInsert.firstElementChild.value.trim() === "") {
         alert("아무것도 안할거니! 할 일을 적어조!");
         return; // 유효성 검증
+    } else if ($todoInsert.firstElementChild.value.length > 10) {
+        $todoInput.classList.add("tenWords");
+        $todoInput.setAttribute("placeholder", "열 글자 지켜라 ㅡㅡ");
+        $todoInput.value = "";
+        return;
     } else {
         const $li = document.createElement("li");
         $li.setAttribute("data-id", getId());
@@ -46,16 +51,16 @@ const todoInsertHandler = (e) => {
         $todoList.appendChild($li);
         //input창 초기화
         $todoInsert.firstElementChild.value = "";
+        $todoInput.classList.remove("tenWords");
+        $todoInput.setAttribute("placeholder", "할 일을 입력하세요");
     }
 };
-
 const removeHandler = (e) => {
     const $removeButton = e.target.closest(".remove");
     if (!$removeButton) {
         return;
     }
-    const $liRemove = $removeButton.parentNode;
-    $todoList.removeChild($liRemove);
+    $todoList.removeChild($removeButton.parentNode);
 };
 const modifyHandler = (e) => {
     const $modifyButton = e.target.closest(".modify");
@@ -79,7 +84,7 @@ const modifyHandler = (e) => {
     } else if ($label.querySelector('input[type="text"]')) {
         const $inputField = $label.querySelector('input[type="text"]');
 
-        if ($inputField.value !== "" && $inputField.value != null) {
+        if ($inputField.value.trim() !== "" && $inputField.value != null) {
             const $spanText = document.createElement("span");
             $spanText.classList.add("text");
             $spanText.textContent = $inputField.value;
@@ -90,15 +95,11 @@ const modifyHandler = (e) => {
     }
 };
 const checkedHandler = (e) => {
-    console.log(e.target);
-
     const $checkbox = e.target.closest("input");
     if (!$checkbox) {
         return;
     }
     const $checkboxSpan = $checkbox.parentNode.querySelector("span");
-    console.log("$checkbox: ", $checkbox);
-
     $checkboxSpan.classList.toggle("checked");
 };
 export { todoInsertHandler, removeHandler, modifyHandler, checkedHandler };
